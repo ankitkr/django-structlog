@@ -20,6 +20,7 @@ class DjangoStructLogInitStep(bootsteps.Step):
         from celery.signals import (
             before_task_publish,
             after_task_publish,
+            task_received,
             task_prerun,
             task_retry,
             task_success,
@@ -29,6 +30,7 @@ class DjangoStructLogInitStep(bootsteps.Step):
 
         before_task_publish.connect(receivers.receiver_before_task_publish)
         after_task_publish.connect(receivers.receiver_after_task_publish)
+        task_received.connect(receivers.receiver_task_received)
         task_prerun.connect(receivers.receiver_task_pre_run)
         task_retry.connect(receivers.receiver_task_retry)
         task_success.connect(receivers.receiver_task_success)
